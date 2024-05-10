@@ -46,13 +46,11 @@ self.addEventListener('fetch', (e) => {
         return;
     }
 
-    e.respondWith(caches.match('offline.html'));
-
-    // e.respondWith(
-    //     caches.match(e.request)
-    //         .then((response) => {
-    //             return response || fetch(e.request).catch(() => caches.match('offline.html'))
-    //         })
-    // )
+    e.respondWith(
+        caches.match(e.request)
+            .then((response) => {
+                return response || fetch(e.request).catch(() => caches.match('offline.html'))
+            })
+    )
 
 });
